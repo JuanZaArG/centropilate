@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centro de Pilates – Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500..700&family=Open+Sans:wght@300;400;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Development version -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<!-- Production version -->
+<script src="https://unpkg.com/lucide@latest"></script>
+</head> 
+<body class="admin-theme">
+  <header class="admin-appbar">
+    <div class="brand">
+      <img src="img/logo.png" alt="Logo Centro Pilates">
+      <div class="brand-text">
+        <span class="brand-title">Centro Pilates</span>
+        <span class="brand-subtitle">Panel administrativo</span>
+      </div>
+    </div>
+    <div class="appbar-actions">
+
+      <button class="pill-chip" id="admin-exit"><a href="index.html" style="text-decoration: none; color: #222;">Salir</a></button>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <section class="admin-section">
+      <div class="admin-container">
+        <div class="admin-hero">
+          <div>
+            
+            <h1>Panel de Controles</h1>
+            <p>Registrá alumnos, instructores y horarios con tarjetas adaptativas y formularios modalizados.</p>
+          </div>
+          <div class="hero-actions">
+            <button class="btn ghost icon-only" onclick="descargarHojaGeneral()" aria-label="Descargar planilla general">
+              <i class="lucide-icon" data-lucide="file-down" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="admin-section">
+      <div class="admin-container">
+        <div class="admin-tabs" role="tablist">
+          <button class="tab-button active" data-tab="tab-alumnos" role="tab">
+            <i class="lucide-icon" data-lucide="users" aria-hidden="true"></i>
+            <span class="sr-only">Alumnos</span>
+          </button>
+          <button class="tab-button" data-tab="tab-pagos" role="tab">
+            <i class="lucide-icon" data-lucide="wallet" aria-hidden="true"></i>
+            <span class="sr-only">Pagos</span>
+          </button>
+          <button class="tab-button" data-tab="tab-instructores" role="tab">
+            <i class="lucide-icon" data-lucide="shirt" aria-hidden="true"></i>
+            <span class="sr-only">Instructores</span>
+          </button>
+          <button class="tab-button" data-tab="tab-horarios" role="tab">
+            <i class="lucide-icon" data-lucide="calendar-clock" aria-hidden="true"></i>
+            <span class="sr-only">Horarios</span>
+          </button>
+          <button class="tab-button" data-tab="tab-planes" role="tab">
+            <i class="lucide-icon" data-lucide="layers" aria-hidden="true"></i>
+            <span class="sr-only">Planes</span>
+          </button>
+          <button class="tab-button" data-tab="tab-gastos" role="tab">
+            <i class="lucide-icon" data-lucide="receipt" aria-hidden="true"></i>
+            <span class="sr-only">Gastos</span>
+          </button>
+          <button class="tab-button" data-tab="tab-agenda" role="tab">
+            <i class="lucide-icon" data-lucide="calendar" aria-hidden="true"></i>
+            <span class="sr-only">Agenda</span>
+          </button>
+        </div>
+
+        <div class="tab-area">
+          <section class="tab-content active" id="tab-alumnos" role="tabpanel">
+            <div class="tab-panel">
+              <div class="admin-subtabs" role="tablist">
+                <button class="subtab-button active" data-subtab="sub-alumnos-list">
+                  <i class="lucide-icon" data-lucide="users" aria-hidden="true"></i>
+                  <span class="sr-only">Alumnos</span>
+                </button>
+                <button class="subtab-button" data-subtab="sub-alumnos-moras">
+                  <i class="lucide-icon" data-lucide="brush-cleaning" aria-hidden="true"></i>
+                  <span class="sr-only">Moras</span>
+                </button>
+              </div>
+
+              <div class="subtab-content active" id="sub-alumnos-list">
+                <div class="panel">
+                  <div class="panel-heading">
+                    <div>
+                      <h2>Alumnos</h2>
+                      <p class="hint">Tarjetas con resumen de datos y estado de pago.</p>
+                    </div>
+                    <div class="panel-actions">
+                      <button class="btn secondary ghost icon-only" id="reload-alumnos" aria-label="Recargar alumnos">
+                        <i class="lucide-icon" data-lucide="refresh-cw" aria-hidden="true"></i>
+                      </button>
+                      <button class="btn primary icon-only" data-modal-target="modal-alumno" aria-label="Agregar alumno">
+                        <i class="lucide-icon" data-lucide="user-plus" aria-hidden="true"></i>
+                      </button>
+                      <button class="btn danger icon-only" data-delete-type="alumnos" aria-label="Eliminar alumno">
+                        <i class="lucide-icon" data-lucide="trash-2" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="cards-grid" id="list-alumnos"></div>
+                </div>
+              </div>
+
+              <div class="subtab-content" id="sub-alumnos-moras">
+                <div class="panel">
+                  <div class="panel-heading">
+                    <div>
+                      <h2>Mora de alumnos</h2>
+                      <p class="hint">Lista de alumnos con estado actual y opción de dar de baja.</p>
+                    </div>
+                  </div>
+                  <div id="mora-list" class="status-grid"></div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <section class="tab-content" id="tab-pagos" role="tabpanel">
+            <div class="tab-panel">
+              <div class="admin-subtabs" role="tablist">
+                <button class="subtab-button active" data-subtab="sub-pagos-mensuales">
+                  <i class="lucide-icon" data-lucide="credit-card" aria-hidden="true"></i>
+                  <span class="sr-only">Pagos mensuales</span>
+                </button>
+                <button class="subtab-button" data-subtab="sub-pagos-recaudacion">
+                  <i class="lucide-icon" data-lucide="chart-pie" aria-hidden="true"></i>
+                  <span class="sr-only">Recaudación mensual</span>
+                </button>
+              </div>
+
+              <div class="subtab-content active" id="sub-pagos-mensuales">
+                <div class="panel">
+                  <div class="panel-heading">
+                    <div>
+                      <h2>Pagos mensuales</h2>
+                      <p class="hint">Asigná plan, instructor y registrá cobros.</p>
+                    </div>
+                  </div>
+                  <div class="panel-actions">
+                    <input type="month" id="pago-mes-filter">
+                    <button class="btn secondary ghost icon-only" id="btn-refrescar-pagos" aria-label="Actualizar pagos">
+                      <i class="lucide-icon" data-lucide="refresh-cw" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn primary icon-only" data-modal-target="modal-control-alumno" aria-label="Registrar pago">
+                      <i class="lucide-icon" data-lucide="credit-card" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <div id="pago-list" class="table-scroll"></div>
+                </div>
+              </div>
+
+              <div class="subtab-content" id="sub-pagos-recaudacion">
+                <div class="panel">
+                  <div class="panel-heading">
+                    <div>
+                      <h2>Recaudación mensual</h2>
+                      <p class="hint">Seleccioná un mes para ver el resumen completo.</p>
+                    </div>
+                  </div>
+                  <div class="panel-actions">
+                    <button class="btn primary icon-only" data-modal-target="modal-recaudacion" aria-label="Elegir mes de recaudación">
+                      <i class="lucide-icon" data-lucide="bar-chart-3" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <div id="recaudacion-body" class="table-scroll"></div>
+                  <p id="total-recaudacion" class="hint"></p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="tab-content" id="tab-instructores" role="tabpanel">
+            <div class="tab-panel">
+              <div class="admin-subtabs" role="tablist">
+                <button class="subtab-button active" data-subtab="sub-instructores-list">
+                  <i class="lucide-icon" data-lucide="users" aria-hidden="true"></i>
+                  <span class="sr-only">Instructores</span>
+                </button>
+                <button class="subtab-button" data-subtab="sub-instructores-sueldos">
+                  <i class="lucide-icon" data-lucide="wallet" aria-hidden="true"></i>
+                  <span class="sr-only">Sueldos</span>
+                </button>
+                <button class="subtab-button" data-subtab="sub-instructores-registros">
+                  <i class="lucide-icon" data-lucide="clipboard-list" aria-hidden="true"></i>
+                  <span class="sr-only">Asistencias y recuperaciones</span>
+                </button>
+              </div>
+
+              <div class="subtab-content active" id="sub-instructores-list">
+                <div class="panel">
+                  <div class="panel-heading">
+                    <div>
+                      <h2>Instructores</h2>
+                      <p class="hint">Visualizá rol, color de identificación y contacto rápido.</p>
+                    </div>
+                    <div class="panel-actions">
+                      <button class="btn secondary ghost icon-only" id="reload-instructores" aria-label="Recargar instructores">
+                        <i class="lucide-icon" data-lucide="refresh-cw" aria-hidden="true"></i>
+                      </button>
+                      <button class="btn primary icon-only" data-modal-target="modal-instructor" aria-label="Agregar instructor">
+                        <i class="lucide-icon" data-lucide="user-plus" aria-hidden="true"></i>
+                      </button>
+                      <button class="btn danger icon-only" data-delete-type="instructores" aria-label="Eliminar instructor">
+                        <i class="lucide-icon" data-lucide="trash-2" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="cards-grid" id="list-instructores"></div>
+                </div>
+              </div>
+
+              <div class="subtab-content" id="sub-instructores-sueldos">
+                <div class="panel">
+                  <div class="panel-heading">
+                    <div>
+                      <h2>Sueldos</h2>
+                      <p class="hint">Calculá y revisá liquidaciones por instructor.</p>
+                    </div>
+                  </div>
+                  <div class="panel-actions">
+                    <button class="btn primary icon-only" data-modal-target="modal-sueldos" aria-label="Procesar sueldos">
+                      <i class="lucide-icon" data-lucide="wallet" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <div id="lista-sueldos" class="table-scroll"></div>
+                </div>
+              </div>
+
+              <div class="subtab-content" id="sub-instructores-registros">
+                <div class="panel">
+                  <div class="panel-heading">
+                    <div>
+                      <h2>Asistencias y recuperaciones recientes</h2>
+                      <p class="hint">Seguimiento rápido para coordinar al equipo.</p>
+                    </div>
+                  </div>
+                  <div class="subnav" role="tablist" aria-label="Ver registros">
+                    <button class="btn small secondary active" id="btn-ver-asistencias" type="button">
+                      <i class="lucide-icon" data-lucide="list-checks" aria-hidden="true"></i>
+                      <span class="sr-only">Asistencias</span>
+                    </button>
+                    <button class="btn small ghost" id="btn-ver-recuperaciones" type="button">
+                      <i class="lucide-icon" data-lucide="history" aria-hidden="true"></i>
+                      <span class="sr-only">Recuperaciones</span>
+                    </button>
+                  </div>
+                  <div id="asistencias-history" class="table-scroll"></div>
+                  <div id="recuperaciones-history" class="table-scroll hidden"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="tab-content" id="tab-horarios" role="tabpanel">
+            <div class="tab-panel">
+              <div class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <h2>Horarios</h2>
+                    <p class="hint">Capacidad, sala e instructor agrupados en tarjetas.</p>
+                  </div>
+                  <div class="panel-actions">
+                    <button class="btn secondary ghost icon-only" id="reload-horarios" aria-label="Recargar horarios">
+                      <i class="lucide-icon" data-lucide="refresh-cw" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn primary icon-only" data-modal-target="modal-horario" aria-label="Agregar horario">
+                      <i class="lucide-icon" data-lucide="calendar-plus" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn danger icon-only" data-delete-type="horarios" aria-label="Eliminar horario">
+                      <i class="lucide-icon" data-lucide="trash-2" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+                <div id="list-horarios" class="horario-day-grid"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="tab-content" id="tab-planes" role="tabpanel">
+            <div class="tab-panel">
+              <div class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <h2>Planes de sesiones</h2>
+                    <p class="hint">Gestioná los planes que aparecen en los formularios.</p>
+                  </div>
+                </div>
+                <div class="panel-actions">
+                  <button class="btn secondary ghost icon-only" id="btn-refresh-planes" aria-label="Recargar planes">
+                    <i class="lucide-icon" data-lucide="refresh-cw" aria-hidden="true"></i>
+                  </button>
+                  <button class="btn primary icon-only" data-modal-target="modal-plan" aria-label="Agregar plan">
+                    <i class="lucide-icon" data-lucide="layers" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div class="table-scroll plans-table">
+                  <table class="admin-table">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Sesiones</th>
+                        <th>Precio</th>
+                        <th>Frecuencia</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody id="planes-table-body"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="tab-content" id="tab-gastos" role="tabpanel">
+            <div class="tab-panel">
+              <div class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <h2>Gastos</h2>
+                    <p class="hint">Revisá y registrá erogaciones del estudio.</p>
+                  </div>
+                </div>
+                <div class="panel-actions">
+                  <button class="btn primary icon-only" data-modal-target="modal-gasto" aria-label="Registrar gasto">
+                    <i class="lucide-icon" data-lucide="receipt" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div id="gastos-list"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="tab-content" id="tab-agenda" role="tabpanel">
+            <div class="tab-panel">
+              <div class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <h2>Agenda general</h2>
+                    <p class="hint">Visualizá y cargá clases por semana.</p>
+                  </div>
+                </div>
+                <div class="panel-actions">
+                  <button class="btn ghost icon-only" id="agenda-prev-week" aria-label="Semana anterior">
+                    <i class="lucide-icon" data-lucide="chevron-left" aria-hidden="true"></i>
+                  </button>
+                  <input type="week" id="agenda-week">
+                  <button class="btn ghost icon-only" id="agenda-next-week" aria-label="Siguiente semana">
+                    <i class="lucide-icon" data-lucide="chevron-right" aria-hidden="true"></i>
+                  </button>
+                  <button class="btn primary icon-only" data-modal-target="modal-agenda-control" aria-label="Crear clase">
+                    <i class="lucide-icon" data-lucide="calendar-plus" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div class="agenda-day-layout">
+                  <div id="agenda-day-selector" class="agenda-day-selector"></div>
+                  <div id="agenda-week-body" class="agenda-day-content"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="bottom-nav__item tab-button active" data-tab="tab-alumnos" aria-label="Alumnos">
+      <i class="lucide-icon" data-lucide="users" aria-hidden="true"></i>
+      <span class="sr-only">Alumnos</span>
+    </button>
+    <button class="bottom-nav__item tab-button" data-tab="tab-pagos" aria-label="Pagos">
+      <i class="lucide-icon" data-lucide="wallet" aria-hidden="true"></i>
+      <span class="sr-only">Pagos</span>
+    </button>
+    <button class="bottom-nav__item tab-button" data-tab="tab-instructores" aria-label="Instructores">
+      <i class="lucide-icon" data-lucide="shirt" aria-hidden="true"></i>
+      <span class="sr-only">Instructores</span>
+    </button>
+    <button class="bottom-nav__item tab-button" data-tab="tab-horarios" aria-label="Horarios">
+      <i class="lucide-icon" data-lucide="calendar-clock" aria-hidden="true"></i>
+      <span class="sr-only">Horarios</span>
+    </button>
+    <button class="bottom-nav__item tab-button" data-tab="tab-planes" aria-label="Planes">
+      <i class="lucide-icon" data-lucide="layers" aria-hidden="true"></i>
+      <span class="sr-only">Planes</span>
+    </button>
+    <button class="bottom-nav__item tab-button" data-tab="tab-gastos" aria-label="Gastos">
+      <i class="lucide-icon" data-lucide="receipt" aria-hidden="true"></i>
+      <span class="sr-only">Gastos</span>
+    </button>
+    <button class="bottom-nav__item tab-button" data-tab="tab-agenda" aria-label="Agenda">
+      <i class="lucide-icon" data-lucide="calendar" aria-hidden="true"></i>
+      <span class="sr-only">Agenda</span>
+    </button>
+  </nav>
+
+<!-- MODAL: LISTA PARA ELIMINAR -->
+<div class="modal hidden" id="modal-select-delete">
+  <div class="modal-content medium">
+    <h2 id="delete-title">Eliminar elemento</h2>
+    <p>Seleccioná qué registro querés eliminar:</p>
+
+    <div id="delete-list" class="delete-list"></div>
+
+    <div class="modal-actions">
+      <button id="cancel-select-delete" class="btn ghost">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CONFIRMACIÓN -->
+<div id="modal-confirm-delete" class="modal hidden">
+  <div class="modal-content">
+    <h2>¿Eliminar este elemento?</h2>
+    <p>Esta acción no se puede deshacer.</p>
+
+    <p id="delete-info" class="delete-info"></p>
+
+    <div class="modal-buttons">
+      <button class="btn secondary" data-close-modal>Cancelar</button>
+      <button id="btn-confirm-delete" class="btn danger">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+
+
+  <div id="modal-alumno" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <header class="modal-header">
+        <div>
+          <p class="eyebrow">Formulario</p>
+          <h3>Registrar alumno</h3>
+        </div>
+        <button class="icon-btn" data-close-modal aria-label="Cerrar">
+          <span class="material-icons">close</span>
+        </button>
+      </header>
+      <form id="form-alumno" class="modal-form">
+        <input type="hidden" name="id" id="alumno-id">
+        <div class="form-grid">
+          <label>
+            <span>Nombre</span>
+            <input name="nombre" required>
+          </label>
+          <label>
+            <span>Apellido</span>
+            <input name="apellido" required>
+          </label>
+          <label>
+            <span>DNI</span>
+            <input name="dni" required>
+          </label>
+          <label>
+            <span>Teléfono</span>
+            <input name="telefono" type="tel">
+          </label>
+          <label>
+            <span>Fecha de nacimiento</span>
+            <input type="date" name="fecha_nacimiento">
+          </label>
+          <label>
+            <span>Sesiones restantes</span>
+            <input type="number" min="0" name="sesiones_restantes">
+          </label>
+          <label>
+            <span>Derivado de médico</span>
+            <select name="derivado_medico">
+              <option value="">No especifica</option>
+              <option value="sí">Sí</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+          <label>
+            <span>Patología / Cirugía</span>
+            <input name="patologia_cirugia">
+          </label>
+          <label>
+            <span>Tipo de patología</span>
+            <input name="patologia_tipo">
+          </label>
+          <label class="full-width">
+            <span>Observaciones</span>
+            <textarea name="observaciones" rows="3"></textarea>
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn text" data-close-modal>Cancelar</button>
+          <button type="submit" class="btn primary">Guardar alumno</button>
+        </div>
+        <p id="msg-alumnos" class="msg"></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-instructor" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <header class="modal-header">
+        <div>
+          <p class="eyebrow">Formulario</p>
+          <h3>Registrar instructor</h3>
+        </div>
+        <button class="icon-btn" data-close-modal aria-label="Cerrar">
+          <span class="material-icons">close</span>
+        </button>
+      </header>
+      <form id="form-instructor" class="modal-form">
+        <input type="hidden" name="id" id="instructor-id">
+        <div class="form-grid">
+          <label>
+            <span>Nombre</span>
+            <input name="nombre" required>
+          </label>
+          <label>
+            <span>Rol</span>
+            <input name="rol" placeholder="Dueño, Instructor, Estética">
+          </label>
+          <label class="color-field">
+            <span>Color de identificación</span>
+            <input type="color" id="color" name="color" value="#8b5cf6">
+          </label>
+          <label>
+            <span>WhatsApp</span>
+            <input name="whatsapp" placeholder="+54...">
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn text" data-close-modal>Cancelar</button>
+          <button type="submit" class="btn primary">Guardar instructor</button>
+        </div>
+        <p id="msg-instructores" class="msg"></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-horario" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <header class="modal-header">
+        <div>
+          <p class="eyebrow">Formulario</p>
+          <h3>Registrar horario</h3>
+        </div>
+        <button class="icon-btn" data-close-modal aria-label="Cerrar">
+          <span class="material-icons">close</span>
+        </button>
+      </header>
+      <form id="form-horario" class="modal-form">
+        <input type="hidden" name="id" id="horario-id">
+        <div class="form-grid">
+          <label>
+            <span>Día</span>
+            <input name="dia" placeholder="Lunes, Martes..." required>
+          </label>
+          <label>
+            <span>Hora</span>
+            <input name="hora" placeholder="18:00" required>
+          </label>
+          <label>
+            <span>Sala</span>
+            <input name="sala" placeholder="Sala 1" required>
+          </label>
+          <label>
+            <span>Capacidad</span>
+            <input name="capacidad" type="number" min="1" max="20" placeholder="Ej: 10">
+          </label>
+          <label>
+            <span>Instructor asignado</span>
+            <select name="instructor_id" id="horario-instructor-select">
+              <option value="">Seleccionar instructor</option>
+            </select>
+          </label>
+          <label>
+            <span>Activo</span>
+            <select name="activo">
+              <option value="sí">Sí</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn text" data-close-modal>Cancelar</button>
+          <button type="submit" class="btn primary">Guardar horario</button>
+        </div>
+        <p id="msg-horarios" class="msg"></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-horarios-dia" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <header class="modal-header">
+        <div>
+          <p class="eyebrow">Horarios</p>
+          <h3 id="modal-horarios-dia-title">Día</h3>
+        </div>
+        <button class="icon-btn" data-close-modal aria-label="Cerrar">
+          <span class="material-icons">close</span>
+        </button>
+      </header>
+      <div id="horarios-dia-content"></div>
+    </div>
+  </div>
+
+  <div id="modal-control-alumno" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <header class="modal-header">
+        <div>
+          <p class="eyebrow">Asignación integral</p>
+          <h3>Plan, horario y pago</h3>
+        </div>
+        <button class="icon-btn" data-close-modal aria-label="Cerrar">
+          <span class="material-icons">close</span>
+        </button>
+      </header>
+      <form id="control-alumno-form" class="modal-form">
+        <div class="form-grid">
+          <label>
+            <span>Alumno</span>
+            <select id="control-alumno" required>
+              <option value="">Seleccionar alumno</option>
+            </select>
+          </label>
+          <label>
+            <span>Plan</span>
+            <select id="control-plan" required>
+              <option value="">Seleccionar plan</option>
+            </select>
+          </label>
+          <label>
+            <span>Instructor</span>
+            <select id="control-instructor" required>
+              <option value="">Seleccionar instructor</option>
+            </select>
+          </label>
+          <label class="span-two control-horarios-field">
+            <span>Horarios</span>
+            <small id="control-horario-hint" class="hint">Elegí plan e instructor para ver horarios.</small>
+            <button type="button" id="control-horario-selector" class="selector-btn">
+              <i class="lucide-icon" data-lucide="clock-8" aria-hidden="true"></i>
+              Seleccionar día y hora
+            </button>
+            <ul id="control-horario-opciones" class="horario-options hidden"></ul>
+            <ul id="control-horario-resumen" class="selected-horarios-list"></ul>
+            <input type="hidden" id="control-horario" required>
+          </label>
+          <label>
+            <span>Fecha de pago</span>
+            <input type="date" id="control-pago-fecha" required>
+          </label>
+          <label>
+            <span>Mes liquidado</span>
+            <div id="control-pago-mes-display" class="hint">Se calcula según la fecha</div>
+            <input type="hidden" id="control-pago-mes">
+          </label>
+          <label>
+            <span>Monto</span>
+            <div id="control-plan-monto" class="hint">El plan define el monto.</div>
+            <input type="hidden" id="control-pago-monto">
+          </label>
+          <label>
+            <span>Medio de pago</span>
+            <select id="control-pago-medio" required>
+              <option value="">Seleccionar medio</option>
+              <option value="Efectivo">Efectivo</option>
+              <option value="Transferencia">Transferencia</option>
+            </select>
+          </label>
+          <label class="span-two">
+            <span>Observación</span>
+            <textarea id="control-pago-observacion"></textarea>
+          </label>
+        </div>
+        <p id="plan-hint" class="hint">Elegí un plan para ver el precio y frecuencia.</p>
+        <div class="modal-actions">
+          <button class="btn text" type="button" data-close-modal>Cancelar</button>
+          <button class="btn secondary" type="reset">Limpiar</button>
+          <button class="btn primary" type="submit">Guardar asignación y pago</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-alumno-aldia" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <header class="modal-header">
+        <div>
+          <p class="eyebrow">Alumno al día</p>
+          <h3>Pago registrado</h3>
+        </div>
+        <button class="icon-btn" data-close-modal aria-label="Cerrar">
+          <span class="material-icons">close</span>
+        </button>
+      </header>
+      <p id="modal-alumno-aldia-msg">Este alumno ya registró el pago para el mes seleccionado.</p>
+      <div class="modal-actions">
+        <button class="btn primary" type="button" data-close-modal>Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-plan" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <header class="modal-header">
+        <div>
+          <p class="eyebrow">Catálogo</p>
+          <h3>Gestionar plan</h3>
+        </div>
+        <button class="icon-btn" data-close-modal aria-label="Cerrar">
+          <span class="material-icons">close</span>
+        </button>
+      </header>
+      <form id="plan-form" class="modal-form">
+        <div class="form-grid">
+          <input type="hidden" id="plan-id">
+          <label>
+            <span>Nombre</span>
+            <input id="plan-nombre" required>
+          </label>
+          <label>
+            <span>Sesiones</span>
+            <input type="number" id="plan-sesiones" min="1" required>
+          </label>
+          <label>
+            <span>Precio</span>
+            <input type="number" id="plan-precio" min="0" step="0.01" required>
+          </label>
+          <label>
+            <span>Frecuencia</span>
+            <input id="plan-frecuencia" required>
+          </label>
+          <label>
+            <span>Activo</span>
+            <select id="plan-activo">
+              <option value="sí">Sí</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button class="btn text" type="button" data-close-modal>Cancelar</button>
+          <button class="btn secondary" type="button" id="plan-reset">Limpiar</button>
+          <button class="btn primary" type="submit">Guardar plan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-gasto" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <header class="modal-header">
+        <div>
+          <p class="eyebrow">Caja diaria</p>
+          <h3>Registrar gasto</h3>
+        </div>
+        <button class="icon-btn" data-close-modal aria-label="Cerrar">
+          <span class="material-icons">close</span>
+        </button>
+      </header>
+      <form id="form-gasto" class="modal-form">
+        <div class="form-grid">
+          <input type="hidden" id="gasto-id">
+          <label>
+            <span>Fecha</span>
+            <input type="date" id="gasto-fecha" required>
+          </label>
+          <label>
+            <span>Categoría</span>
+            <input id="gasto-categoria" required>
+          </label>
+          <label>
+            <span>Descripción</span>
+            <input id="gasto-descripcion" required>
+          </label>
+          <label>
+            <span>Monto</span>
+            <input type="number" id="gasto-monto" min="0" step="0.01" required>
+          </label>
+          <label>
+            <span>Medio de pago</span>
+            <input id="gasto-medio" required>
+          </label>
+          <label>
+            <span>Comprobante</span>
+            <input id="gasto-comprobante">
+          </label>
+          <label class="span-two">
+            <span>Observación</span>
+            <textarea id="gasto-observacion"></textarea>
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button class="btn text" type="button" data-close-modal>Cancelar</button>
+          <button class="btn secondary" type="button" id="btn-gasto-reset">Limpiar</button>
+          <button class="btn primary" type="submit">Guardar gasto</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-recaudacion" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <header class="modal-header">
+        <div>
+          <p class="eyebrow">Reportes</p>
+          <h3>Recaudación mensual</h3>
+        </div>
+        <button class="icon-btn" data-close-modal aria-label="Cerrar">
+          <span class="material-icons">close</span>
+        </button>
+      </header>
+      <form class="modal-form">
+        <label>
+          <span>Mes a consultar</span>
+          <input type="month" id="mes-recaudacion" required>
+        </label>
+        <div class="modal-actions">
+          <button class="btn text" type="button" data-close-modal>Cancelar</button>
+          <button class="btn primary" type="button" id="btn-recaudacion">Cargar datos</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-sueldos" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <header class="modal-header">
+        <div>
+          <p class="eyebrow">Liquidaciones</p>
+          <h3>Sueldos del equipo</h3>
+        </div>
+        <button class="icon-btn" data-close-modal aria-label="Cerrar">
+          <span class="material-icons">close</span>
+        </button>
+      </header>
+      <form class="modal-form">
+        <label>
+          <span>Mes a procesar</span>
+          <input type="month" id="mes-sueldos" required>
+        </label>
+        <div class="modal-actions">
+          <button class="btn text" type="button" data-close-modal>Cancelar</button>
+          <button class="btn primary" type="button" id="btn-calcular-sueldos">Calcular</button>
+          <button class="btn secondary" type="button" id="btn-cargar-sueldos">Refrescar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-agenda-control" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <header class="modal-header">
+        <div>
+          <p class="eyebrow">Agenda general</p>
+          <h3>Crear clase</h3>
+        </div>
+        <button class="icon-btn" data-close-modal aria-label="Cerrar">
+          <span class="material-icons">close</span>
+        </button>
+      </header>
+      <form id="agenda-control-form" class="modal-form">
+        <div class="form-grid">
+          <input type="hidden" id="agenda-control-id">
+          <label>
+            <span>Fecha</span>
+            <input type="date" id="agenda-control-fecha" required>
+          </label>
+          <label>
+            <span>Hora</span>
+            <input type="time" id="agenda-control-hora" required>
+          </label>
+          <label>
+            <span>Sala</span>
+            <input type="text" id="agenda-control-sala" placeholder="Sala 1" required>
+          </label>
+          <label>
+            <span>Instructor</span>
+            <select id="agenda-control-instructor" required>
+              <option value="">Seleccionar instructor</option>
+            </select>
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button class="btn text" type="button" data-close-modal>Cancelar</button>
+          <button class="btn secondary" type="button" id="agenda-control-delete">Eliminar clase</button>
+          <button class="btn primary" type="submit">Crear clase</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-recuperacion-reprogramar" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <header class="modal-header">
+        <div>
+          <p class="eyebrow">Recuperación</p>
+          <h3>Reprogramar clase</h3>
+        </div>
+        <button class="icon-btn" data-close-modal aria-label="Cerrar">
+          <span class="material-icons">close</span>
+        </button>
+      </header>
+      <form id="recup-reprogramar-form" class="modal-form">
+        <input type="hidden" id="recup-reprogramar-id">
+        <input type="hidden" id="recup-reprogramar-alumno">
+        <input type="hidden" id="recup-reprogramar-instructor">
+        <div class="form-grid">
+          <label class="full-width">
+            <span>Alumno</span>
+            <input id="recup-reprogramar-alumno-nombre" disabled>
+          </label>
+          <label class="full-width">
+            <span>Instructor</span>
+            <input id="recup-reprogramar-instructor-nombre" disabled>
+          </label>
+          <label>
+            <span>Fecha</span>
+            <input type="date" id="recup-reprogramar-fecha" required>
+          </label>
+          <label>
+            <span>Horario</span>
+            <select id="recup-reprogramar-horario" required>
+              <option value="">Seleccionar horario</option>
+            </select>
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button class="btn text" type="button" data-close-modal>Cancelar</button>
+          <button class="btn primary" type="submit">Reprogramar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    });
+  </script>
+  <script src="admin.js"></script>
+</body>
+</html>

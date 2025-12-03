@@ -1,0 +1,12 @@
+{
+  "name": "pilates-center-netlify",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo \"No build step\""
+  },
+  "dependencies": {
+    "dayjs": "^1.11.19",
+    "googleapis": "^120.0.0"
+  }
+}

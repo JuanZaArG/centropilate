@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Centro Pilates – Tutor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500..700&family=Open+Sans:wght@300;400;600;700&family=Poppins:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="tutor-theme">
+    <header class="admin-appbar">
+      <div class="brand">
+        <img src="img/logo.png" alt="Centro Pilates" />
+        <div class="brand-text">
+          <span class="brand-title">Centro Pilates</span>
+          <span class="brand-subtitle">Panel instructor</span>
+        </div>
+      </div>
+      <button id="tutor-logout" class="pill-chip">
+        <span class="material-icons">logout</span>Salir
+      </button>
+    </header>
+
+    <main class="admin-main">
+      <section class="admin-section">
+        <div class="admin-container">
+          <div class="panel">
+            <div class="panel-heading">
+              <h2>Agenda semanal</h2>
+              <small>Visualizá tus horarios asignados.</small>
+            </div>
+            <div class="panel-actions">
+              <button class="btn ghost icon-only" id="agenda-prev-week" aria-label="Semana anterior">
+                <i class="lucide-icon" data-lucide="chevron-left" aria-hidden="true"></i>
+              </button>
+              <input type="week" id="agenda-week" />
+              <button class="btn ghost icon-only" id="agenda-next-week" aria-label="Siguiente semana">
+                <i class="lucide-icon" data-lucide="chevron-right" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="agenda-day-layout">
+              <div id="agenda-day-selector" class="agenda-day-selector"></div>
+              <div id="agenda-week-body" class="agenda-day-content"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <div class="admin-container">
+          <div class="panel">
+            <div class="panel-heading">
+              <h2>Asistencias registradas</h2>
+              <small>Listado de AsistenciaPorHora filtrado por tu ID.</small>
+            </div>
+            <div id="tutor-asistencias-table" class="table-scroll"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <div class="admin-container">
+          <div class="panel">
+            <div class="panel-heading">
+              <h2>Sueldos del instructor</h2>
+            </div>
+            <div id="tutor-sueldos" class="table-scroll"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <div class="admin-container">
+          <div class="panel">
+            <div class="panel-heading">
+              <h2>Recuperaciones</h2>
+              <p class="hint">Seguimiento de faltas para reprogramar.</p>
+            </div>
+            <div id="tutor-recuperaciones-table" class="table-scroll"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <div class="admin-container">
+          <div class="panel">
+            <div class="panel-heading">
+              <h2>Datos médicos</h2>
+            </div>
+            <p class="hint">Seleccioná un alumno desde agenda o recuperaciones para abrir un modal con su ficha clínica.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="modal-agenda" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-card">
+        <header class="modal-header">
+          <div>
+            <h3>Registrar turno</h3>
+            <p class="hint">Definí fecha, sala y alumno a asignar.</p>
+          </div>
+          <button class="icon-btn" data-close-modal aria-label="Cerrar">
+            <span class="material-icons">close</span>
+          </button>
+        </header>
+        <form id="agenda-form" class="modal-form">
+          <div class="form-grid">
+            <label>
+              <span>Fecha</span>
+              <input type="date" id="agenda-fecha" required />
+            </label>
+            <label>
+              <span>Hora</span>
+              <input type="time" id="agenda-hora" required />
+            </label>
+            <label>
+              <span>Sala</span>
+              <input type="text" id="agenda-sala" placeholder="Sala 1" required />
+            </label>
+            <label>
+              <span>Alumno</span>
+              <select id="agenda-alumno" required>
+                <option value="">Seleccionar</option>
+              </select>
+            </label>
+          </div>
+          <div class="modal-actions">
+            <button class="btn text" type="button" data-close-modal>Cancelar</button>
+            <button class="btn primary" type="submit">Guardar turno</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal-recuperacion" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-card">
+        <header class="modal-header">
+          <div>
+            <h3>Nueva recuperación</h3>
+            <p class="hint">Registrá la solicitud para darle seguimiento.</p>
+          </div>
+          <button class="icon-btn" data-close-modal aria-label="Cerrar">
+            <span class="material-icons">close</span>
+          </button>
+        </header>
+        <form id="form-recuperacion" class="modal-form">
+          <div class="form-grid">
+            <label>
+              <span>Alumno</span>
+              <select id="recuperacion-alumno" required>
+                <option value="">Seleccionar</option>
+              </select>
+            </label>
+            <label>
+              <span>Mes</span>
+              <input type="month" id="recuperacion-mes" required />
+            </label>
+            <label>
+              <span>Fecha</span>
+              <input type="date" id="recuperacion-fecha" required />
+            </label>
+            <label>
+              <span>Estado</span>
+              <select id="recuperacion-estado">
+                <option value="pendiente">Pendiente</option>
+                <option value="programada">Programada</option>
+                <option value="finalizada">Finalizada</option>
+              </select>
+            </label>
+            <label>
+              <span>Motivo</span>
+              <input id="recuperacion-motivo" required />
+            </label>
+            <label class="span-two">
+              <span>Observación</span>
+              <textarea id="recuperacion-observacion"></textarea>
+            </label>
+          </div>
+          <div class="modal-actions">
+            <button class="btn text" type="button" data-close-modal>Cancelar</button>
+            <button class="btn primary" type="submit">Guardar solicitud</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal-recuperacion-reprogramar" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-card">
+        <header class="modal-header">
+          <div>
+            <p class="eyebrow">Recuperación</p>
+            <h3>Reprogramar clase</h3>
+          </div>
+          <button class="icon-btn" data-close-modal aria-label="Cerrar">
+            <span class="material-icons">close</span>
+          </button>
+        </header>
+        <form id="recup-reprogramar-form" class="modal-form">
+          <input type="hidden" id="recup-reprogramar-id">
+          <input type="hidden" id="recup-reprogramar-alumno">
+          <input type="hidden" id="recup-reprogramar-instructor">
+          <div class="form-grid">
+            <label class="full-width">
+              <span>Alumno</span>
+              <input id="recup-reprogramar-alumno-nombre" disabled>
+            </label>
+            <label class="full-width">
+              <span>Instructor</span>
+              <input id="recup-reprogramar-instructor-nombre" disabled>
+            </label>
+            <label>
+              <span>Fecha</span>
+              <input type="date" id="recup-reprogramar-fecha" required>
+            </label>
+            <label>
+              <span>Horario</span>
+              <select id="recup-reprogramar-horario" required>
+                <option value="">Seleccionar horario</option>
+              </select>
+            </label>
+          </div>
+          <div class="modal-actions">
+            <button class="btn text" type="button" data-close-modal>Cancelar</button>
+            <button class="btn primary" type="submit">Reprogramar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal-datos-medicos" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-card">
+        <header class="modal-header">
+          <div>
+            <h3>Datos médicos del alumno</h3>
+            <p class="hint">Información útil para personalizar las clases.</p>
+          </div>
+          <button class="icon-btn" data-close-modal aria-label="Cerrar">
+            <span class="material-icons">close</span>
+          </button>
+        </header>
+        <div id="datos-medicos">
+          <p>No se seleccionó ningún alumno.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="loader-overlay" class="loader-overlay hidden" aria-hidden="true">
+      <div class="loader-spinner"></div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+      });
+    </script>
+    <script src="tutor.js"></script>
+  </body>
+</html>

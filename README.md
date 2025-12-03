@@ -1,6 +1,6 @@
 # Centro Pilates – Deploy y puesta en marcha
 
-Este repositorio (https://drive.google.com/drive/u/1/folders/1dfNQVZDE9ZKQUyffa7xwTCokix3hze8D) contiene el panel administrativo y funciones serverless del Centro Pilates. Ahora podés clonar el proyecto directamente desde GitHub para instalar, configurar y desplegar en Netlify vía CLI.
+Este repositorio contiene el panel administrativo y funciones serverless del Centro Pilates. Ahora podés clonar el proyecto directamente desde GitHub para instalar, configurar y desplegar en Netlify vía CLI.
 
 ## 1. Preparar el proyecto desde GitHub
 

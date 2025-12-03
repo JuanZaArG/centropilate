@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro Pilates - Sistema de Gestión | Los ProgramaNautas</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <main class="slides-container">
+        <!-- Slide 1: Portada / Presentación del equipo -->
+        <section class="slide active">
+            <div class="slide-content centered-content">
+                <div class="mascot-container">
+                    <img src="assets/logo2.png" alt="Mascota ProgramaNautas" id="mascot-open">
+                    <img src="assets/logo1.png" alt="Mascota ProgramaNautas Parpadeando" id="mascot-closed">
+                </div>
+                <img src="assets/losprogramanautastext.png" alt="Logo Los ProgramaNautas" class="logo-programanautas">
+                <h1 class="display-title">Sistema de Gestión para Centro Pilates</h1>
+                <p class="subtitle">Transformamos la gestión en una experiencia fluida para dueños, instructores y alumnos.</p>
+
+
+            </div>
+        </section>
+
+        <!-- Slide 2: Contexto e identificación del problema -->
+        <section class="slide">
+            <div class="slide-content">
+                <h2>El desafío actual del Centro Pilates</h2>
+                <p class="highlight-phrase">“Hoy se invierte más tiempo en administración que en mejorar la experiencia del alumno.”</p>
+                <div class="card-container two-columns">
+                    <div class="card problem-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </span>
+                            <h3>Organización</h3>
+                        </div>
+                        <p>Desorden para organizar alumnos, horarios y salas.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">😵</span>
+                            <span>¡Ay, me vuelvo loooocou!</span>
+                        </div>
+                    </div>
+                    <div class="card problem-card status-danger-bg">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <rect x="2" y="5" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="2" y1="10" x2="22" y2="10"></line>
+                                    <line x1="6" y1="15" x2="10" y2="15"></line>
+                                    <line x1="14" y1="15" x2="20" y2="15"></line>
+                                </svg>
+                            </span>
+                            <h3>Control de Pagos</h3>
+                        </div>
+                        <p>Control manual y confuso de pagos (morosos, deudores).</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">💸</span>
+                            <span>Pagos a la deriva</span>
+                        </div>
+                    </div>
+                    <div class="card problem-card status-warning-bg">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="6" x2="16" y2="6"></line>
+                                    <path d="M8 10h.01"></path>
+                                    <path d="M12 10h.01"></path>
+                                    <path d="M8 14h.01"></path>
+                                    <path d="M12 14h.01"></path>
+                                    <path d="M16 14h.01"></path>
+                                    <path d="M8 18h.01"></path>
+                                    <path d="M12 18h.01"></path>
+                                    <path d="M16 18h.01"></path>
+                                </svg>
+                            </span>
+                            <h3>Cálculo de Sueldos</h3>
+                        </div>
+                        <p>Cálculo de sueldos de instructores que consume mucho tiempo.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">⏳</span>
+                            <span>Horas en planillas</span>
+                        </div>
+                    </div>
+                    <div class="card problem-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </span>
+                            <h3>Seguimiento</h3>
+                        </div>
+                        <p>Recuperaciones y ausencias sin un seguimiento claro.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">🧭</span>
+                            <span>Ausencias sin rastro</span>
+                        </div>
+                    </div>
+                     <div class="card problem-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path>
+                                    <path d="m9 12 2 2 4-4"></path>
+                                </svg>
+                            </span>
+                            <h3>Datos Sensibles</h3>
+                        </div>
+                        <p>Riesgo de errores con datos médicos importantes de los alumnos.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">🩺</span>
+                            <span>Info médica dispersa</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Usuario / Dolor (Dueño & Instructores) -->
+        <section class="slide">
+            <div class="slide-content">
+                <h2>¿A quién ayudamos?</h2>
+                <div class="card-container two-columns">
+                    <div class="card user-pain-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <circle cx="12" cy="12" r="6"></circle>
+                                    <line x1="12" y1="2" x2="12" y2="6"></line>
+                                    <line x1="12" y1="18" x2="12" y2="22"></line>
+                                    <line x1="2" y1="12" x2="6" y2="12"></line>
+                                    <line x1="18" y1="12" x2="22" y2="12"></line>
+                                </svg>
+                            </span>
+                            <h3>Dueño del Centro</h3>
+                        </div>
+                        <p class="pain-points">Facilitemos al dueño a gestionar sus alumnos, instructores y gastos sin perder tiempo.</p>
+                        <div class="chat-demo" aria-label="Diálogo rápido de registro de alumno">
+                            <div class="chat-bubble chat-student">👩 "Hola, quiero hacer Pilates"</div>
+                            <div class="chat-bubble chat-owner">"Hola! Te registro en 5s" 👨‍💼</div>
+                            <div class="chat-bubble chat-student">👩 "¡Gracias! ¿Cuándo empiezo?"</div>
+                            <div class="chat-bubble chat-owner">"Hoy, 17:30, Sala 1, con el instructor Gaston 👨‍🦲" 👨‍💼</div>
+                        </div>
+                    </div>
+                    <div class="card user-pain-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <path d="M22 12h-4l-3 9-4-18-3 9H2"></path>
+                                </svg>
+                            </span>
+                            <h3>Instructores</h3>
+                        </div>
+                        <p class="pain-points">Poca claridad de horarios, sueldos y recuperaciones. No saber cuántos alumnos tienen por franja horaria.</p>
+                        <div class="chat-demo" aria-label="Diálogo rápido con instructora">
+                            <div class="chat-bubble chat-student">👱🏻‍♀️ "Hola Mauro, ¿cómo estás?"</div>
+                            <div class="chat-bubble chat-owner">"Hola Moni, Tu alumna faltó hoy" 👨🏻‍💼</div>
+                            <div class="chat-bubble chat-student">👱🏻‍♀️ "Si, voy a reprogramar su sesión"</div>
+                            <div class="chat-bubble chat-owner">"Excelente" 👨🏻‍💼</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Nuestra solución (Descripción del sistema) -->
+        <section class="slide">
+            <div class="slide-content">
+                <h2>Nuestra solución: Panel integral para Centro Pilates</h2>
+                <div class="card-container three-columns">
+                    <div class="card feature-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </span>
+                        
+                            <h4>Gestión de Alumnos</h4>
+                        </div>
+                        <p>Historial médico, planes y estados de pago claros por color.</p>
+                        <div class="card-tag status-badges" aria-label="Estados de alumnos">
+                            <span class="dot-badge dot-green" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                                </svg>
+                            </span>
+                            <span class="dot-badge dot-yellow" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="15" y1="15" x2="9" y2="15"></line>
+                                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                                </svg>
+                            </span>
+                            <span class="dot-badge dot-red" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M16 16s-1.5-2-4-2-4 2-4 2"></path>
+                                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <rect x="2" y="5" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="2" y1="10" x2="22" y2="10"></line>
+                                    <line x1="6" y1="15" x2="10" y2="15"></line>
+                                    <line x1="14" y1="15" x2="20" y2="15"></line>
+                                </svg>
+                            </span>
+                          
+                            <h4>Planes y Pagos</h4>
+                        </div>
+                        <p>Planes configurables con estados: al día, en mora o deudor.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">🧾</span>
+                            <span>Cobros en un vistazo</span>
+                        </div>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <polyline points="16 11 18 13 22 9"></polyline>
+                                </svg>
+                            </span>
+         
+                            <h4>Gestión de Instructores</h4>
+                        </div>
+                        <p>Alta rápida y color asignado para identificar a cada instructor.</p>
+                        <div class="card-tag status-badges" aria-label="Identificadores de instructores">
+                            <span class="square-badge square-violet" aria-hidden="true">
+                                <div class="icon-shirt"></div>
+                            </span>
+                            <span class="square-badge square-green" aria-hidden="true">
+                                <div class="icon-shirt"></div>
+                            </span>
+                            <span class="square-badge square-orange" aria-hidden="true">
+                                <div class="icon-shirt"></div>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </span>
+  
+                            <h4>Horarios y Salas</h4>
+                        </div>
+                        <p>Agenda visual con cupos y salas disponibles.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">📅</span>
+                            <span>Turnos claros y ordenados</span>
+                        </div>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="6" x2="16" y2="6"></line>
+                                    <path d="M8 10h.01"></path>
+                                    <path d="M12 10h.01"></path>
+                                    <path d="M8 14h.01"></path>
+                                    <path d="M12 14h.01"></path>
+                                    <path d="M16 14h.01"></path>
+                                    <path d="M8 18h.01"></path>
+                                    <path d="M12 18h.01"></path>
+                                    <path d="M16 18h.01"></path>
+                                </svg>
+                            </span>
+
+                            <h4>Cálculo de Sueldos</h4>
+                        </div>
+                        <p>Automático, basado en suscripciones y asistencias.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">⚡</span>
+                            <span>Liquidaciones al toque</span>
+                        </div>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    <line x1="10" y1="9" x2="8" y2="9"></line>
+                                </svg>
+                            </span>
+       
+                            <h4>Registro de Gastos</h4>
+                        </div>
+                        <p>Asociados al dueño o instructor para un ajuste de fin de mes.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">📊</span>
+                            <span>Gastos ordenados y claros</span>
+                        </div>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="m9 12 2 2 4-4"></path>
+                                </svg>
+                            </span>
+   
+                            <h4>Asistencias</h4>
+                        </div>
+                        <p>El tutor marca asistencia y puede reprogramar recuperaciones.</p>
+                        <div class="card-tag status-badges" aria-label="Estados de asistencia">
+                            <span class="dot-badge dot-green" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            <span class="dot-badge dot-red" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </span>
+                            <span class="dot-badge dot-gray" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <polyline points="23 4 23 10 17 10"></polyline>
+                                    <polyline points="1 20 1 14 7 14"></polyline>
+                                    <path d="M3.51 9a9 9 0 0 1 14.13-3.36L23 10"></path>
+                                    <path d="M20.49 15A9 9 0 0 1 6.36 18.36L1 14"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Beneficios para el negocio (Ingresos y control) -->
+        <section class="slide">
+             <div class="slide-content">
+                <h2>¿En qué beneficia al Centro Pilates?</h2>
+                <div class="card-container two-columns">
+                    <div class="card benefit-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <path d="M3 17l6-6 4 4 8-8"></path>
+                                    <polyline points="17 3 21 3 21 7"></polyline>
+                                </svg>
+                            </span>
+                            <h3>Más control de ingresos</h3>
+                        </div>
+                        <p>Vista clara de quién paga, quién debe y cuánto se recauda por plan.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">📈</span>
+                            <span>Cobranza al día</span>
+                        </div>
+                    </div>
+                    <div class="card benefit-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path>
+                                    <path d="m9 12 2 2 4-4"></path>
+                                </svg>
+                            </span>
+                            <h3>Menos morosos</h3>
+                        </div>
+                        <p>Estados de pago visibles que permiten acciones rápidas y preventivas.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">🛡️</span>
+                            <span>Alertas de mora</span>
+                        </div>
+                    </div>
+                    <div class="card benefit-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <rect x="3" y="5" width="18" height="14" rx="2" ry="2"></rect>
+                                    <path d="M21 10h-6a2 2 0 0 0 0 4h6"></path>
+                                    <circle cx="15" cy="12" r="1"></circle>
+                                </svg>
+                            </span>
+                            <h3>Sueldos claros y transparentes</h3>
+                        </div>
+                        <p>Cálculo automático preciso que elimina errores manuales y genera confianza.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">🧾</span>
+                            <span>Recibos confiables</span>
+                        </div>
+                    </div>
+                    <div class="card benefit-card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <path d="M5 2h14v20l-3-2-3 2-3-2-3 2z"></path>
+                                    <line x1="9" y1="8" x2="15" y2="8"></line>
+                                    <line x1="9" y1="12" x2="15" y2="12"></line>
+                                    <line x1="9" y1="16" x2="13" y2="16"></line>
+                                </svg>
+                            </span>
+                            <h3>Control de gastos</h3>
+                        </div>
+                        <p>Registro de gastos para ver la foto real de la rentabilidad del mes.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">📊</span>
+                            <span>Gastos ordenados</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Beneficios en la calidad del servicio -->
+        <section class="slide">
+            <div class="slide-content">
+                <h2>Mejor servicio, mejores experiencias</h2>
+                <div class="card-container two-columns">
+                    <div class="card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    <circle cx="12" cy="16" r="4"></circle>
+                                    <polyline points="12 14 12 16 14 17"></polyline>
+                                </svg>
+                            </span>
+                            <h4>Horarios Claros</h4>
+                        </div>
+                        <p>Menos confusiones y reprogramaciones caóticas.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">🗓️</span>
+                            <span>Agenda limpia</span>
+                        </div>
+                    </div>
+                     <div class="card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"></path>
+                                    <circle cx="12" cy="13" r="3"></circle>
+                                    <line x1="14.5" y1="15.5" x2="16.5" y2="17.5"></line>
+                                </svg>
+                            </span>
+                            <h4>Datos Accesibles</h4>
+                        </div>
+                        <p>Clases más seguras y personalizadas al tener la info del alumno a mano.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">🔎</span>
+                            <span>Datos a mano</span>
+                        </div>
+                    </div>
+                     <div class="card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <polyline points="23 4 23 10 17 10"></polyline>
+                                    <polyline points="1 20 1 14 7 14"></polyline>
+                                    <path d="M3.51 9a9 9 0 0 1 14.13-3.36L23 10"></path>
+                                    <path d="M20.49 15A9 9 0 0 1 6.36 18.36L1 14"></path>
+                                </svg>
+                            </span>
+                            <h4>Recuperaciones Ordenadas</h4>
+                        </div>
+                        <p>El alumno siente que lo acompañan y que su tiempo vale.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">🔁</span>
+                            <span>Reprograma fácil</span>
+                        </div>
+                    </div>
+                     <div class="card">
+                        <div class="card-title">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                    <path d="M7 20c1.1-2 3-3 5-3s3.9 1 5 3"></path>
+                                </svg>
+                            </span>
+                            <h4>Instructores Enfocados</h4>
+                        </div>
+                        <p>Mejor calidad de clase, lo que aumenta la retención de alumnos.</p>
+                        <div class="card-tag">
+                            <span class="card-emoji" aria-hidden="true">🎯</span>
+                            <span>Profe concentrado</span>
+                        </div>
+                    </div>
+                </div>
+                <blockquote class="testimonial">"Ahora puedo dedicarme a la clase, sabiendo que toda la administración está resuelta." - Instructor Gaston</blockquote>
+            </div>
+        </section>
+
+        <!-- Slide 7: Experiencia del alumno (frase emocional fuerte) -->
+        <section class="slide emotional-slide">
+            <div class="slide-content centered-content">
+                <span class="icon-badge" aria-hidden="true">
+                    <svg class="lucide-icon" viewBox="0 0 24 24">
+                        <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"></path>
+                    </svg>
+                </span>
+                <h2 class="manifesto-title">Más que un sistema, una experiencia</h2>
+                <p class="manifesto">
+                    Buscamos que el alumno no sea solo un número, sino que pueda sentir y experimentar el momento.
+                    <br><br>
+                    Que cada clase sea un espacio donde la tecnología desaparece y solo quede la experiencia de su cuerpo, su respiración y su bienestar.
+                </p>
+                <button class="btn btn-tertiary" data-goto-slide="7">Llevemos esta experiencia a Centro Pilates</button>
+            </div>
+        </section>
+
+        <!-- Slide 8: Cierre, agradecimiento y QR para demo -->
+        <section class="slide">
+            <div class="slide-content">
+                <div class="final-row">
+                    <div class="final-left">
+                        <img src="assets/brand.jpg" alt="Logo Centro Pilates" class="logo-final">
+                        <div class="final-text">
+                            <h3>Centro Pilates</h3>
+                            <p class="final-thanks">Muchas gracias por su tiempo</p>
+                        </div>
+                    </div>
+                    <div class="final-right">
+                        <p class="final-qr-title">Escaneá el QR</p>
+                        <div class="qr-container">
+                            <div id="qrcode"></div>
+                        </div>
+                        <div class="demo-link">
+                            <span class="icon-badge" aria-hidden="true">
+                                <svg class="lucide-icon" viewBox="0 0 24 24">
+                                    <path d="M15 7h3a5 5 0 0 1 0 10h-3"></path>
+                                    <path d="M9 17H6A5 5 0 0 1 6 7h3"></path>
+                                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                                </svg>
+                            </span>
+                            <a href="https://centropilatedemo.netlify.app/" class="demo-url">https://centropilatedemo.netlify.app/</a>
+                        </div>
+                        <div class="demo-accounts">
+                            <p class="demo-accounts-title">Cuentas para la Demo</p>
+                            <ul class="demo-accounts-list">
+                                <li><strong>Usuario Admin:</strong> Mauro — Contraseña:<span class="demo-credential">1234</span></li>
+                                <li><strong>Usuario Instructor:</strong> Karina — Contraseña:<span class="demo-credential">1234</span></li>
+                            </ul>
+                                         
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Navegación -->
+
+
+    <!-- Indicador de Progreso -->
+    <div id="progress-indicator" class="progress-indicator"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
